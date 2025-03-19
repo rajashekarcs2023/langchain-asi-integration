@@ -6,7 +6,18 @@
   <img src="https://img.shields.io/badge/Status-Alpha-orange" alt="Status">
 </p>
 
-This package provides seamless integration between [LangChain](https://www.langchain.com/) and the ASI1 API, allowing you to leverage ASI1's powerful language models with LangChain's extensive ecosystem of tools and abstractions.
+## What is langchain-asi?
+
+This package provides seamless integration between [LangChain](https://www.langchain.com/) and the [ASI AI](https://asi.ai) platform, allowing you to leverage ASI1's powerful language models with LangChain's extensive ecosystem of tools and abstractions.
+
+With langchain-asi, you can:
+
+- Use ASI1 models (like asi1-mini) as drop-in replacements for other LLMs in your LangChain applications
+- Build complex chains and agents with ASI1 models
+- Create structured outputs with validation
+- Integrate with LangGraph for multi-agent workflows
+- Stream responses for better user experience
+- Use tool calling capabilities
 
 ## 📋 Table of Contents
 
@@ -28,19 +39,52 @@ This package provides seamless integration between [LangChain](https://www.langc
 
 ## 🚀 Installation
 
-Install the package using pip:
+### From Source (Current Method)
+
+Clone the repository and install from source:
 
 ```bash
-pip install langchain-asi
+git clone https://github.com/rajashekarcs2023/langchain-asi-integration.git
+cd langchain-asi-integration
+pip install -e .
+```
+
+### From PyPI (Coming Soon)
+
+Once published to PyPI, you'll be able to install the package using pip:
+
+```bash
+pip install langchain-asi  # Not available yet
 ```
 
 ## 📝 Requirements
 
 - Python 3.8+
 - An ASI1 API key (obtain from [ASI AI](https://asi.ai))
-- LangChain Core (automatically installed as a dependency)
+
+### Dependencies
+
+The following dependencies will be automatically installed when you install the package:
+
+```
+langchain-core>=0.1.0
+httpx>=0.24.1
+requests>=2.31.0
+typing-extensions>=4.7.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+langchain>=0.3.0
+```
+
+For LangGraph integration, you'll also need:
+
+```
+langgraph>=0.0.26
+```
 
 ## 🔑 Environment Setup
+
+### Option 1: Environment Variable
 
 Set your ASI1 API key as an environment variable:
 
@@ -48,46 +92,121 @@ Set your ASI1 API key as an environment variable:
 export ASI1_API_KEY="your-api-key"
 ```
 
-Or in your Python code (not recommended for production):
+### Option 2: .env File (Recommended for Development)
+
+Create a `.env` file in your project directory:
+
+```
+ASI1_API_KEY=your-api-key
+```
+
+Then load it in your Python code:
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv()  # This will load the API key from .env
+```
+
+### Option 3: Direct Assignment (Not Recommended for Production)
 
 ```python
 import os
 os.environ["ASI1_API_KEY"] = "your-api-key"
 ```
 
+## 🔄 Drop-in Replacement for Other LLMs
+
+One of the key features of langchain-asi is that it allows you to use ASI1 models as drop-in replacements for other LLMs in your existing LangChain applications. Here's how you can switch from OpenAI to ASI1:
+
+### Before (with OpenAI):
+
+```python
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model_name="gpt-3.5-turbo",
+    temperature=0.7,
+    openai_api_key="your-openai-api-key"
+)
+
+response = llm.invoke("Tell me a joke about programming.")
+print(response.content)
+```
+
+### After (with ASI1):
+
+```python
+from langchain_asi import ASI1ChatModel
+
+llm = ASI1ChatModel(
+    model_name="asi1-mini",
+    temperature=0.7
+)
+
+response = llm.invoke("Tell me a joke about programming.")
+print(response.content)
+```
+
+That's it! The ASI1ChatModel implements the same interface as other LangChain chat models, so you can use it in chains, agents, and other LangChain constructs without changing any other code.
+
 ## ✨ Key Features
 
 - **ASI1ChatModel**: A LangChain chat model implementation for ASI1 API
-- **ASIJsonOutputParser**: Output parser for handling JSON responses from ASI models
-- **ASIJsonOutputParserWithValidation**: Output parser with Pydantic validation for JSON responses
-- **LangGraph Integration**: Support for using ASI1 models in LangGraph workflows
-- **Tool Calling**: Support for function/tool calling with ASI1 models
-- **Streaming**: Support for streaming responses from ASI1 models
-- **Multi-step Chains**: Support for creating complex multi-step chains with ASI1 models
-- **Conversation Memory**: Integration with LangChain's memory systems for stateful conversations
+  - Supports all standard LangChain chat model features
+  - Fully compatible with LangChain's chains, agents, and memory systems
+  - Configurable parameters like temperature, max_tokens, and top_p
+
+- **Tool Calling**: Bind tools to the model for function calling capabilities
+  - Define tools using Pydantic models
+  - Automatic schema conversion and validation
+
+- **Structured Output**: Generate and validate structured data
+  - ASIJsonOutputParser for parsing JSON responses
+  - ASIJsonOutputParserWithValidation for schema validation using Pydantic
+
+- **Streaming**: Stream responses token by token for better user experience
+
+- **LangGraph Integration**: Use ASI1 models in LangGraph workflows
+  - Create multi-agent systems
+  - Build complex decision trees and workflows
+
+- **Memory Integration**: Works with LangChain's memory systems
+  - ConversationBufferMemory
+  - Other memory types
 
 ## 📚 Usage Examples
 
 ### Basic Usage
 
-```python
-from langchain_asi import ASI1ChatModel
-from langchain_core.messages import HumanMessage, SystemMessage
+Here's a simple example of how to use the ASI1ChatModel for a basic chat interaction:
 
-# Initialize the chat model
-chat = ASI1ChatModel(
-    model_name="asi1-mini",
-    temperature=0.7,
+```python
+import os
+from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_asi import ASI1ChatModel
+
+# Load API key from .env file
+load_dotenv()
+
+# Initialize the model
+llm = ASI1ChatModel(
+    model_name="asi1-mini",  # Use the ASI1 mini model
+    temperature=0.7,       # Control randomness (0.0 to 1.0)
 )
 
-# Create messages
+# Single message
+response = llm.invoke("What is artificial intelligence?")
+print(response.content)
+
+# Multiple messages with system message
 messages = [
-    SystemMessage(content="You are a helpful assistant."),
-    HumanMessage(content="Tell me a short joke about programming.")
+    SystemMessage(content="You are a helpful AI assistant that specializes in explaining complex topics simply."),
+    HumanMessage(content="Explain quantum computing to a 10-year-old.")
 ]
 
-# Generate response
-response = chat.invoke(messages)
+response = llm.invoke(messages)
 print(response.content)
 ```
 
@@ -220,7 +339,6 @@ load_dotenv()
 llm = ASI1ChatModel(
     model_name="asi1-mini",
     temperature=0.3,
-    max_tokens=4000
 )
 
 # Create a memory for conversation context
@@ -263,37 +381,28 @@ result = chain({"question": "Should I invest in high-growth tech stocks?"})
 print(result["response"])
 ```
 
-The complete implementation includes:
-
-1. Risk assessment based on the user's question
-2. Personalized financial advice generation based on the risk assessment
-3. Conversational response formatting
-4. Memory for maintaining conversation context
-
-For the complete implementation, see the [examples directory](https://github.com/rajashekarcs2023/langchain-asi-integration/tree/main/langchain-asi/examples).
+For the complete implementation, see the [examples directory](https://github.com/rajashekarcs2023/langchain-asi-integration/tree/main/examples).
 
 ### LangGraph Integration
 
-The package includes examples of integrating ASI1ChatModel with LangGraph for creating complex, multi-agent workflows.
-
-#### Simple Graph Example
+LangChain ASI can be seamlessly integrated with LangGraph to create complex multi-agent workflows. Here's a simple example:
 
 ```python
 import os
-from typing import Annotated, Dict, List, TypedDict
-import operator
-import functools
+from dotenv import load_dotenv
+from typing import Dict, List, Tuple, Annotated, TypedDict
 
-from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
-from langgraph.graph import StateGraph, END
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_asi import ASI1ChatModel
+from langgraph.graph import StateGraph, END
 
-# Set your API key
-os.environ["ASI1_API_KEY"] = "your-api-key"
+# Load API key from .env file
+load_dotenv()
 
-class ConversationState(TypedDict):
+# Define state schema
+class State(TypedDict):
     """Define the state structure for the conversation."""
-    messages: Annotated[List[BaseMessage], operator.add]
+    messages: Annotated[List[Dict], operator.add]
     next: str
 
 def search_node(state: Dict, llm: ASI1ChatModel) -> Dict:
@@ -310,60 +419,34 @@ def analyst_node(state: Dict, llm: ASI1ChatModel) -> Dict:
     response = llm.invoke([system_message] + messages)
     return {"messages": state["messages"] + [response], "next": "FINISH"}
 
-def create_graph():
-    """Create a simple graph with two nodes."""
-    llm = ASI1ChatModel(model_name="asi1-mini", temperature=0.7)
-    
-    # Create the nodes
-    search = functools.partial(search_node, llm=llm)
-    analyst = functools.partial(analyst_node, llm=llm)
-    
-    # Create the graph
-    graph = StateGraph(ConversationState)
-    
-    # Add nodes
-    graph.add_node("search", search)
-    graph.add_node("analyst", analyst)
-    
-    # Add edges
-    graph.add_conditional_edges(
-        "search",
-        lambda x: x["next"],
-        {
-            "analyst": "analyst",
-            "FINISH": END
-        },
-    )
-    
-    graph.add_conditional_edges(
-        "analyst",
-        lambda x: x["next"],
-        {
-            "search": "search",
-            "FINISH": END
-        },
-    )
-    
-    # Set entry point
-    graph.set_entry_point("search")
-    
-    return graph.compile()
+# Build the graph
+workflow = StateGraph(State)
 
-def main():
-    """Run the example."""
-    graph = create_graph()
-    query = "What are the recent financial performance and risk factors for Tesla?"
-    result = graph.invoke({"messages": [HumanMessage(content=query)], "next": ""})
-    
-    print("\nFinal Result:\n")
-    for message in result["messages"]:
-        print(f"{message.content}\n")
+# Add nodes
+workflow.add_node("search", search_node)
+workflow.add_node("analyst", analyst_node)
 
-if __name__ == "__main__":
-    main()
+# Add edges
+workflow.add_edge("search", "analyst")
+workflow.add_edge("analyst", END)
+
+# Set the entry point
+workflow.set_entry_point("search")
+
+# Compile the graph
+graph = workflow.compile()
+
+# Run the graph
+query = "What are the latest advancements in quantum computing?"
+result = graph.invoke({"messages": [HumanMessage(content=query)], "next": ""})
+
+# Print the results
+for message in result["messages"]:
+    if hasattr(message, "content"):
+        print(f"{message.type}: {message.content}\n")
 ```
 
-For more complex examples, see the [examples directory](https://github.com/rajashekarcs2023/langchain-asi-integration/tree/main/langchain-asi/examples).
+For more complex examples, check out the [LangGraph examples directory](examples/langgraph_example).
 
 ## 📖 API Reference
 
@@ -406,11 +489,39 @@ class ASIJsonOutputParserWithValidation(ASIJsonOutputParser):
 
 ## 🧪 Testing
 
-The package includes comprehensive tests for all functionality. To run the tests:
+The package includes a comprehensive test suite. To run the tests, first install the development dependencies:
 
 ```bash
-pip install pytest
-pytest
+pip install -e ".[dev]"
+```
+
+Or manually install the test dependencies:
+
+```bash
+pip install pytest pytest-cov
+```
+
+Then run the tests:
+
+```bash
+python -m pytest -v
+```
+
+The test suite includes tests for:
+
+- Basic chat functionality
+- Streaming
+- Tool calling
+- Output parsing with validation
+- Memory integration
+- LangGraph integration
+
+### Test Coverage
+
+To generate a test coverage report:
+
+```bash
+python -m pytest --cov=langchain_asi tests/
 ```
 
 ## 🤝 Contributing
