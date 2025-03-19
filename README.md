@@ -541,5 +541,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/rajashekarcs2023">Rajashekar Vennavelli</a>
+  Developed by <a href="https://github.com/rajashekarcs2023">Rajashekar Vennavelli</a>
 </p>
