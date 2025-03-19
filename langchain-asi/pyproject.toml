@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langchain-asi"
+version = "0.1.0"
+description = "LangChain integrations for ASI AI."
+readme = "README.md"
+requires-python = ">=3.8.1"
+license = {text = "MIT"}
+keywords = ["langchain", "asi", "llm", "ai"]
+authors = [
+    {name = "Rajashekar Vennavelli", email = "rajashekar.vennavelli@fetch.ai"}  # Update with your info
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "langchain-core>=0.1.0",
+    "httpx>=0.24.1",
+    "requests>=2.31.0",
+    "typing-extensions>=4.7.0",
+    "pydantic>=2.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/rajashekarcs2023/langchain-asi-integration"  # Update with your GitHub repo
+"Bug Tracker" = "https://github.com/rajashekarcs2023/langchain-asi-integration/issues"  # Update
+"Documentation" = "https://github.com/rajashekarcs2023/langchain-asi-integration#readme"  # Update
+"Source Code" = "https://github.com/rajashekarcs2023/langchain-asi-integration"  # Update
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
