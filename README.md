@@ -8,7 +8,7 @@
 
 ## Overview
 
-This package provides seamless integration between [LangChain](https://www.langchain.com/) and the [ASI AI](https://asi.ai) platform, allowing you to use ASI's language models as a drop-in replacement for OpenAI and other LLM providers in your LangChain applications.
+This package provides seamless integration between [LangChain](https://www.langchain.com/) and the [ASI AI](https://asi1.ai) platform, allowing you to use ASI's language models as a drop-in replacement for OpenAI and other LLM providers in your LangChain applications.
 
 **Key Features:**
 - 🔄 **Direct OpenAI Replacement** - Use ASI models in place of OpenAI with minimal code changes
