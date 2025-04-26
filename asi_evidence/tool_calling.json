@@ -1,0 +1,33 @@
+{
+  "test_case": "Tool Calling",
+  "query": "What's the weather like in San Francisco, CA? Use Fahrenheit.",
+  "raw_response": {
+    "model": "asi1-mini",
+    "id": "id_emzTDUkK4sGPi8lhn",
+    "executable_data": [],
+    "conversation_id": null,
+    "thought": [
+      null
+    ],
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": "Okay, I can get the weather in San Francisco, CA for you. I will use Fahrenheit as the unit.\n",
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 63,
+      "completion_tokens": 36,
+      "total_tokens": 99
+    }
+  },
+  "issues_identified": [
+    "Missing tool_calls array when finish_reason is tool_calls",
+    "Tool intent expressed in natural language content instead of structured tool_calls"
+  ]
+}

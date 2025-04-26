@@ -1,4 +1,4 @@
-"""Simple LangGraph example using ASI1ChatModel."""
+"""Simple LangGraph example using ChatASI."""
 import os
 from typing import Annotated, Dict, List, TypedDict
 
@@ -7,11 +7,13 @@ from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 import functools
 
 from langgraph.graph import StateGraph, END
-from langchain_asi import ASI1ChatModel
+from langchain_asi import ChatASI
 
 
 # Set your API key - for a real implementation, use environment variables
-os.environ["ASI1_API_KEY"] = "your-apikey"  # Replace with your actual API key
+# The ASI API key should be set in your environment variables as ASI_API_KEY
+# You can set this with: export ASI_API_KEY="your-api-key"
+os.environ["ASI_API_KEY"] = "sk_491aa37d22cc490883508f47e0c76e7abda7b212ab0642989937690bbd73a0b3"  # Replace with your actual API key
 
 
 class ConversationState(TypedDict):
@@ -20,7 +22,7 @@ class ConversationState(TypedDict):
     next: str
 
 
-def search_node(state: Dict, llm: ASI1ChatModel) -> Dict:
+def search_node(state: Dict, chat: ChatASI) -> Dict:
     """Process a search request."""
     # Get the messages
     messages = state["messages"]
@@ -29,13 +31,13 @@ def search_node(state: Dict, llm: ASI1ChatModel) -> Dict:
     system_message = SystemMessage(content="You are a search expert. Provide information about the query.")
     
     # Call the LLM
-    response = llm.invoke([system_message] + messages)
+    response = chat.invoke([system_message] + messages)
     
     # Return the updated state
     return {"messages": state["messages"] + [response], "next": "analyst"}
 
 
-def analyst_node(state: Dict, llm: ASI1ChatModel) -> Dict:
+def analyst_node(state: Dict, chat: ChatASI) -> Dict:
     """Process an analysis request."""
     # Get the messages
     messages = state["messages"]
@@ -44,7 +46,7 @@ def analyst_node(state: Dict, llm: ASI1ChatModel) -> Dict:
     system_message = SystemMessage(content="You are a financial analyst. Analyze the information provided.")
     
     # Call the LLM
-    response = llm.invoke([system_message] + messages)
+    response = chat.invoke([system_message] + messages)
     
     # Return the updated state
     return {"messages": state["messages"] + [response], "next": "FINISH"}
@@ -52,15 +54,13 @@ def analyst_node(state: Dict, llm: ASI1ChatModel) -> Dict:
 
 def create_graph():
     """Create a simple graph with two nodes."""
-    # Initialize the LLM
-    llm = ASI1ChatModel(
-        model_name="asi1-mini",
-        temperature=0.7,
-    )
+    # Initialize the chat model
+    # The ASI API key should be set in your environment variables as ASI_API_KEY
+    chat = ChatASI(model_name="asi1-mini")
     
     # Create the nodes
-    search = functools.partial(search_node, llm=llm)
-    analyst = functools.partial(analyst_node, llm=llm)
+    search = functools.partial(search_node, chat=chat)
+    analyst = functools.partial(analyst_node, chat=chat)
     
     # Create the graph
     graph = StateGraph(ConversationState)

@@ -1,0 +1,34 @@
+{
+  "test_case": "Basic Chat",
+  "query": "What is the capital of France?",
+  "raw_response": {
+    "model": "asi1-mini",
+    "id": "id_yP6Pm20m3PimDkAWi",
+    "executable_data": [],
+    "conversation_id": null,
+    "thought": [
+      "The user is asking for the capital of France. This is a straightforward fact-based question. The capital of France is a well-known piece of information and is documented in reliable sources. The answer is Paris."
+    ],
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "The capital of France is Paris.",
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 25,
+      "completion_tokens": 57,
+      "total_tokens": 82
+    }
+  },
+  "issues_identified": [
+    "Additional fields",
+    null,
+    null
+  ]
+}

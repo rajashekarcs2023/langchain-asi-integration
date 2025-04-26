@@ -3,24 +3,23 @@ import sys
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.memory import ConversationBufferMemory
-from langchain_asi import ASI1ChatModel
+from langchain_asi import ChatASI
 
 # Load environment variables
 load_dotenv()
 
-# Check if ASI1_API_KEY is set
-if not os.environ.get("ASI1_API_KEY"):
-    print("Error: ASI1_API_KEY environment variable not found.")
-    print("Please create a .env file with your ASI1_API_KEY or set it directly in your environment.")
-    print("Example .env file content: ASI1_API_KEY=your-api-key-here")
+# Check if ASI_API_KEY is set
+if not os.environ.get("ASI_API_KEY"):
+    print("Error: ASI_API_KEY environment variable not found.")
+    print("Please create a .env file with your ASI_API_KEY or set it directly in your environment.")
+    print("Example .env file content: ASI_API_KEY=your-api-key-here")
     sys.exit(1)
 
-# Initialize our ASI1 model
-llm = ASI1ChatModel(
+# Initialize our ASI model
+llm = ChatASI(
     model_name="asi1-mini",
     temperature=0.3,
-    max_tokens=4000,
-    api_key=os.environ.get("ASI1_API_KEY")
+    max_tokens=4000
 )
 
 # Create a memory for conversation context
@@ -119,7 +118,7 @@ def advisor_chain():
     return process_question
 
 def main():
-    print("ASI1-Powered Financial Advisor")
+    print("ASI-Powered Financial Advisor")
     print("------------------------------")
     print("Ask me any financial question, or type 'exit' to quit.")
     print("Example questions:")

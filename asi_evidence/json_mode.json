@@ -1,0 +1,33 @@
+{
+  "test_case": "JSON Mode",
+  "query": "List 3 popular tourist attractions in Paris.",
+  "raw_response": {
+    "model": "asi1-mini",
+    "id": "id_bKCdGGAGMLhLQxyCj",
+    "executable_data": [],
+    "conversation_id": null,
+    "thought": [
+      "1. Understand the query: The user is asking for a list of three popular tourist attractions in Paris.\n2. Identify attractions: Paris is known for several iconic landmarks. The most popular ones typically include the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral.\n3. Verify attractions: Based on general knowledge, these attractions are indeed among the most visited in Paris."
+    ],
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "```json\n{\n  \"attractions\": [\n    \"Eiffel Tower\",\n    \"Louvre Museum\",\n    \"Notre-Dame Cathedral\"\n  ]\n}\n```",
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 39,
+      "completion_tokens": 123,
+      "total_tokens": 162
+    }
+  },
+  "issues_identified": [
+    "Response is not valid JSON despite response_format=json_object"
+  ],
+  "is_valid_json": false
+}

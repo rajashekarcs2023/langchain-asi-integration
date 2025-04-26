@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-04-15T20:01:02.096722",
+  "query": "How do Apple's supply chain risks in their latest 10-K filing compare to recent market analyst concerns?",
+  "response": "{'error': \"Client error '400 Bad Request' for url 'https://api.asi1.ai/v1/chat/completions'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400\"}",
+  "sec_analysis": "",
+  "market_analysis": ""
+}

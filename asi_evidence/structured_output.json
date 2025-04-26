@@ -1,0 +1,32 @@
+{
+  "test_case": "Structured Output",
+  "query": "Write a short review of the movie Inception.",
+  "raw_response": {
+    "model": "asi1-mini",
+    "id": "id_x3wOFuIDypu6RWrHK",
+    "executable_data": [],
+    "conversation_id": null,
+    "thought": [
+      "1. Understand the task: The user is requesting a short review of the movie \"Inception.\"\n2. Recall key aspects of the movie: \"Inception\" is a 2010 sci-fi thriller directed by Christopher Nolan, known for its complex plot, stunning visuals, and thought-provoking themes.\n3. Identify strengths: The film excels in storytelling, visual effects, and performances (especially by Leonardo DiCaprio and Tom Hardy).\n4. Note potential critiques: Some viewers find the plot confusing or overly complex.\n5. Structure the review: Keep it concise, balanced, and engaging\u2014highlighting both the film's brilliance and its challenges.\n6. Aim for a neutral but appreciative tone."
+    ],
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "Christopher Nolan's *Inception* is a mind-bending masterpiece that blurs the lines between dreams and reality. With its intricate plot, jaw-dropping visuals, and stellar performances\u2014particularly from Leonardo DiCaprio\u2014the film immerses viewers in a thrilling heist across layered subconscious realms. While some may find its complexity daunting, *Inception* rewards attention with profound themes of memory, guilt, and perception. A visually stunning, intellectually stimulating tour de force. (Rating: 9/10)",
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 35,
+      "completion_tokens": 255,
+      "total_tokens": 290
+    }
+  },
+  "issues_identified": [
+    "Missing function_call in response"
+  ]
+}

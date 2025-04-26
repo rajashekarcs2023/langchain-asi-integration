@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-04-15T17:06:43.740698",
+  "query": "How do Apple's supply chain risks in their latest 10-K filing compare to recent market analyst concerns?",
+  "response": "{'error': 'Error from ASI API. Status code: 400. Response: {\"status\":0,\"message\":\"This model\u2019s maximum context length is 28000 tokens, however you requested 33728 tokens (33728 in your prompt, 0 for the completion). Please reduce your prompt length.\",\"data\":{},\"code\":400,\"ev\":4455}'}",
+  "sec_analysis": "",
+  "market_analysis": ""
+}

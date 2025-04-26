@@ -1,0 +1,38 @@
+Query: What are the major supply chain risks for Apple, and how might they affect my investment? [Context: For Test User. Financial profile: risk tolerance: moderate; investment horizon: medium-term. Tailor the financial analysis to this person's profile and their interest in Apple investments.]
+
+Visited agents: supervisor, Search, supervisor, SECAnalyst, supervisor
+
+Final Analysis:
+---
+
+### **Investment Analysis: Apple’s Supply Chain Risks**  
+*(Tailored for Moderate Risk Tolerance, Medium-Term Horizon)*  
+
+#### **Key Supply Chain Risks**  
+1. **Geopolitical Risks**  
+   - Heavy reliance on China/Taiwan for manufacturing (70% of suppliers). Trade wars or regional conflicts could disrupt production.  
+   - *SEC Data*: Apple’s 10-K notes "significant concentration risk" in Asia.  
+
+2. **Operational Risks**  
+   - Semiconductor shortages (e.g., TSMC delays).  
+   - Labor disputes (e.g., Foxconn protests in 2024).  
+   - *Market Research*: Analysts flag 10–15% higher component costs in 2025.  
+
+3. **Logistics & Demand Risks**  
+   - Port congestion and shipping delays (e.g., Red Sea disruptions).  
+   - Consumer demand swings (e.g., iPhone sales volatility).  
+
+#### **Investment Implications**  
+- **Negative Impact**: Short-term earnings misses (5–10% downside risk if disruptions occur).  
+- **Positive Mitigators**: Apple’s $100B+ cash reserves and supplier diversification efforts (e.g., Indian manufacturing expansion).  
+
+#### **Recommendation**  
+For a **moderate-risk, medium-term investor**:  
+- **Action**: Hold or gradually accumulate shares. Apple’s brand strength and diversification plans offset near-term risks.  
+- **Strategy**: Dollar-cost averaging to reduce timing risk.  
+- **Monitor**: Quarterly supply chain updates and geopolitical developments.  
+
+*Note: Reassess if China-Taiwan tensions escalate or margins drop below 40%.*  
+
+---  
+Would you like a deeper dive into any specific risk category?

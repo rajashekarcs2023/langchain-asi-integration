@@ -1,0 +1,33 @@
+{
+  "test_case": "Parallel Tool Calls",
+  "query": "I'm planning a trip to San Francisco and New York. What's the weather and population in both cities?",
+  "raw_response": {
+    "model": "asi1-mini",
+    "id": "id_zwVoCmbydWNbqCMOU",
+    "executable_data": [],
+    "conversation_id": null,
+    "thought": [
+      null
+    ],
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": "Okay, I can help you with that. I will use the available tools to get the weather and population for both San Francisco and New York. First, I'll start with San Francisco.\n",
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 76,
+      "completion_tokens": 56,
+      "total_tokens": 132
+    }
+  },
+  "issues_identified": [
+    "Missing tool_calls array when finish_reason is tool_calls"
+  ],
+  "tool_calls_count": 0
+}
