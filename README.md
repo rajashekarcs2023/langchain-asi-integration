@@ -32,9 +32,18 @@ response = openai_llm.invoke("What is the capital of France?")
 ```python
 # After: Using ASI with LangChain (direct replacement)
 from langchain_asi import ChatASI
+from langchain_core.messages import HumanMessage
 
+# Initialize with your API key
 asi_llm = ChatASI(asi_api_key="your-api-key")
+
+# Standard LangChain pattern with messages
+response = asi_llm.invoke([HumanMessage(content="What is the capital of France?")])
+print(response.content)
+
+# ASI also supports simplified string input (convenience feature)
 response = asi_llm.invoke("What is the capital of France?")
+print(response.content)
 ```
 
 ### OpenAI Compatibility Layer (for LangGraph)
