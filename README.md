@@ -584,6 +584,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgements
 
+<<<<<<< HEAD
 - [LangChain](https://www.langchain.com/) for the amazing framework
 - [ASI AI](https://asi.ai) for their powerful language models
 - All contributors who have helped improve this integration
+=======
+<p align="center">
+  Developed by <a href="https://github.com/rajashekarcs2023">Rajashekar Vennavelli</a>
+</p>
+>>>>>>> 32fcb92558e93631bfb2e6938768d11e97473c10
